@@ -1,9 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
+{% if user.is_authenticated %}
+<div class="jumbotron">
+    <h1> Welcome back! Give us a new review!</h1>
+</div>
+{% else %}
 <div class="jumbotron">
     <h1>Welcome to Bobcat Brewz!</h1>
     <p>The place wear QU students talk about the beer they drink</p>
+    <p><a class="btn btn-lg btn-primary" href="{% url 'registration_register' %}">Signup</a></p>
 </div>
+{% endif %}
 {% endblock %}
 
-            
