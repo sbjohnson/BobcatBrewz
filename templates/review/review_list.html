@@ -2,7 +2,7 @@
 {% block content %}
 {% for review in object_list %}
 <div class="panel">
-    <h3>{{ review.Beer }}</h3>
+    <h3><a href="{{ review.get_absolute_url }}">{{ review.Beer }}</a></h3>
     <p> Reviewed by {{ review.user.uesrname }} on {{ review.created_at }}</p>
 </div>
 {% endfor %}

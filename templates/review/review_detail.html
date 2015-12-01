@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ review.Beer }}</h1>
+<p>{{ review.description }}</p>
+<p>Asked by {{ review.user.username }} on {{ review.created_at }}</p>
+{% endblock %}
+
