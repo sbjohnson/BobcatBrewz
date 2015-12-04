@@ -158,9 +158,13 @@ class UserDeleteView(DeleteView):
             raise PermissionDenied()
         return object
 
-    def delete(self, request, *args, **kwargs):r
+    def delete(self, request, *args, **kwargs):
         user = super(UserDeleteView, self).get_object(*args)
         user.is_active = False
         user.save()
         return redirect(self.get_success_url())
 
+class SearchReviewListView(ReviewListView):
+    def get_queryset(self):
+        incoming_query_string = self.request.GET.get('query','')
+        return Review.objects.filter(Beer__icontains=incoming_query_string)
