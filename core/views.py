@@ -24,7 +24,7 @@ class ReviewListView(ListView):
 class ReviewDetailView(DetailView):
     model = Review
     template_name = 'review/review_detail.html'
-    
+
     def get_context_data(self, **kwargs):
         context =super(ReviewDetailView, self).get_context_data(**kwargs)
         review = Review.objects.get(id=self.kwargs['pk'])
@@ -60,6 +60,14 @@ class CommentUpdateView(UpdateView):
     pk_url_kwarg = 'comment_pk'
     template_name = 'comment/comment_form.html'
     fields = ['text']
-    
+
+    def get_success_url(self):
+        return self.object.review.get_absolute_url()
+
+class CommentDeleteView(DeleteView):
+    model = Comment
+    pk_url_kwarg = 'comment_pk'
+    template_name = 'comment/comment_confirm_delete.html'
+
     def get_success_url(self):
         return self.object.review.get_absolute_url()
